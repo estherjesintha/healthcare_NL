@@ -72,46 +72,7 @@ def main():
             print(e)
             raise
 
-        # -------------------------
-        # 3. Functions for WFS download
-        # -------------------------
-        def download_wfs_geojson(url, layer_name, crs="EPSG:28992"):
-            """
-            Fetches a WFS layer and returns it as a GeoDataFrame.
-            """
-            params = {
-                "service": "WFS",
-                "version": "1.1.0",
-                "request": "GetFeature",
-                "typeName": layer_name,
-                "outputFormat": "application/json",
-                "srsName": crs
-            }
-            r = requests.get(url, params=params)
-            r.raise_for_status()
-            return gpd.read_file(r.text)
 
-
-
-        # -------------------------
-        # 4. Download Administrative boundaries
-        # -------------------------
-        print("Downloading administrative boundaries (municipalities)...")
-        muni = download_wfs_geojson(
-            "https://service.pdok.nl/kadaster/bestuurlijkegebieden/wfs/v1_0?",
-            "bg:Gemeentegebied"
-        )
-        muni.to_file("municipal_boundaries.geojson", driver="GeoJSON")
-        
-        # -------------------------
-        # 5. Download Population data
-        # -------------------------
-        print("Downloading population data (CBS LAU)...")
-        pop = download_wfs_geojson(
-            "https://service.pdok.nl/cbs/pd/wfs/v1_0?",
-            "pd:pd-nl-lau-2018"
-        )
-        pop.to_file("popdensitylau.geojson", driver="GeoJSON")
 
         # -------------------------
         # 4. Download Administrative boundaries (robust)
