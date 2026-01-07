@@ -15,9 +15,14 @@ from healthcare_nl import healthcare_NL as hp
 # ------------------------
 # Fixtures
 # ------------------------
-#The first test
+
+# Fixtures create reusable test data that is injected into tests automatically.
 @pytest.fixture
 def sample_points():
+    """
+    Fake WFS response data.
+    Used to test download and parsing logic without network dependency.
+    """
     return gpd.GeoDataFrame(
         {"id": [1, 2]},
         geometry=[Point(0, 0), Point(1, 1)],
@@ -27,6 +32,10 @@ def sample_points():
 
 @pytest.fixture
 def sample_fishnet():
+    """
+    Simplified spatial grid (fishnet) used to test geometry area,
+    centroid computation, and spatial relationships.
+    """
     return gpd.GeoDataFrame(
         {"grid_id": [0, 1]},
         geometry=[
@@ -39,6 +48,10 @@ def sample_fishnet():
 
 @pytest.fixture
 def sample_healthcare():
+    """
+    Fake healthcare facility locations.
+    Used for distance computation and underserved-area logic.
+    """
     return gpd.GeoDataFrame(
         {"name": ["HC1", "HC2"]},
         geometry=[Point(0.5, 0.5), Point(3, 1)],
@@ -51,6 +64,7 @@ def sample_healthcare():
 # ------------------------
 
 def test_download_function_exists():
+     # Check that the main download function is defined in the module
     """Ensure core function exists."""
     assert hasattr(hp, "download_wfs_geojson"), "download_wfs_geojson() function missing"
 
@@ -64,6 +78,7 @@ def test_download_returns_geodataframe(sample_points, monkeypatch):
             pass
 
     monkeypatch.setattr(hp.requests, "get", lambda *a, **k: FakeResp())
+    # Replace file reading with fixture data
     monkeypatch.setattr(hp.gpd, "read_file", lambda _: sample_points)
 
     gdf = hp.download_wfs_geojson("url", "layer")
