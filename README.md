@@ -1,8 +1,7 @@
 # Healthcare Facilities in the Netherlands
 
-[![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
-[![Poetry](https://img.shields.io/badge/poetry-1.9.4-lightgrey.svg)](https://python-poetry.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11.9-blue.svg)](https://www.python.org/)
+[![Poetry](https://img.shields.io/badge/poetry-2.2.1-lightgrey.svg)](https://python-poetry.org/)
 
 This repository implements a reproducible geospatial workflow to analyze healthcare accessibility across municipalities in a selected Dutch province. Using open data, APIs, spatial algorithms and visualizations, it identifies underserved areas and high-risk municipalities.
 
