@@ -1,0 +1,12 @@
+# Poetry / virtual environments
+.venv/
+
+# Python noise
+__pycache__/
+*.pyc
+
+# Pytest
+.pytest_cache/
+
+# Editor stuff
+.vscode/
