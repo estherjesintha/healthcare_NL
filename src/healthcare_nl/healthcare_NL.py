@@ -858,8 +858,13 @@ def main():
         print("\nAnalysis complete.")
 
         # -------------------------
-        # map visualization
+        # Map visualization: 
         # -------------------------
+        """
+        Choropleth maps and scatter plots are produced to visualize underserved areas and
+        demand–supply relationships. Rendering is handled in the browser to ensure reliable
+        output generation and to reduce load on the Python runtime.
+        """
         # -------------------------
         # Safety checks
         # -------------------------
